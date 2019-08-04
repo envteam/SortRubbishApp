@@ -17,13 +17,20 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'mvn -B -DskipTests clean package'
+        sh 'echo "#### PWD = " + $(pwd)'
+        sh 'mvn -B -DskipTests clean compile'
       }
     }
 
     stage('Test') {
       steps {
         sh 'mvn -B test'
+      }
+    }
+
+    stage('Package') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
       }
     }
 
